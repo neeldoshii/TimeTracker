@@ -1,9 +1,8 @@
 package com.example.timetrackerapp.homeScreen
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +13,7 @@ import com.example.timetrackerapp.database.Database
 import com.example.timetrackerapp.database.entities.TaskEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Time
@@ -24,10 +24,11 @@ class HomeScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val taskNameET: = findViewById<>()
+
 //        val tagNameET
         val tasksRecyclerView: RecyclerView = findViewById(R.id.tasksRecyclerView)
-        val addbtn: BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        taskDB = Room.databaseBuilder(this, Database::class.java, "Tempdb").build()
 
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -43,16 +44,29 @@ class HomeScreen : AppCompatActivity() {
                     println(2)
 
 
-                    // on below line we are creating a new bottom sheet dialog.
                     val dialog = BottomSheetDialog(this)
 
-                    // on below line we are inflating a layout file which we have created.
-                    val view = layoutInflater.inflate(R.layout.create_task, null)
 
-                    // on below line we are creating a variable for our button
+                    val view = layoutInflater.inflate(R.layout.create_task, null)
+                    val taskNameET:TextInputEditText = view.findViewById(R.id.taskNameET)
+                    val tagNameET:TextInputEditText = view.findViewById(R.id.tagNameET)
+                    val btnClose = view.findViewById<Button>(R.id.idBtnDismiss)
+
+                    btnClose.setOnClickListener {
+                        println(tagNameET.text)
+                        println(taskNameET.text)
+
+                        GlobalScope.launch {
+                            taskDB.TaskDao()
+                                .insertTask(TaskEntity(0, taskNameET.text.toString(), tagNameET.text.toString(), Time(System.currentTimeMillis())))
+                        }
+                        dialog.dismiss()
+                    }
+
+                    dialog.setCancelable(false)
                     dialog.setContentView(view)
                     dialog.show()
-                    // which we are using to dismiss our dialog.
+
 
                     true
                 }
@@ -74,12 +88,7 @@ class HomeScreen : AppCompatActivity() {
 
 
 
-        taskDB = Room.databaseBuilder(this, Database::class.java, "Tempdb").build()
-//println(System.currentTimeMillis())
-        GlobalScope.launch {
-            taskDB.TaskDao()
-                .insertTask(TaskEntity(0, "UI ", "Ok", Time(System.currentTimeMillis())))
-        }
+
         taskDB.TaskDao().getTaskDetails()
             .observe(this, Observer { Log.d("Datashit", it.toString()) })
         // Live data alreadfy works on background thread so no need to add inside global scope
@@ -105,26 +114,6 @@ class HomeScreen : AppCompatActivity() {
 
 
 
-    fun loadFragment(fragment: Fragment){
-//        val transaction = supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.fragmentContainerView,fragment)
-//        transaction.commit()
-
-//        val fragmentManager = supportFragmentManager
-//        val fragment = CreateTask()
-//        fragment.show((this).supportFragmentManager,"show vgdsd")
-
-
-
-//        val fragmentManager = supportFragmentManager
-//        val fragment = CreateTask()
-//        fragmentManager.beginTransaction()
-//            .add(R.id.lol, fragment, "my_popup_fragment_tag")
-//            .addToBackStack(null)
-//            .commit()
-
-
-    }
 
 }
 

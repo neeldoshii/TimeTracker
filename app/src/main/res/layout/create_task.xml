@@ -29,12 +29,13 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/taskNameET"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Hello">
+            android:hint="Enter the task name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskNameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -52,13 +53,14 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tagNameET"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter the Task Name">
+            android:hint="Enter the Tag Name">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tagNameET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
