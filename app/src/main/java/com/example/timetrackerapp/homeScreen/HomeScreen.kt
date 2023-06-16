@@ -1,9 +1,11 @@
 package com.example.timetrackerapp.homeScreen
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +27,9 @@ class HomeScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView(R.layout.activity_main)
-
+        var homeScreenflag:Boolean=true
 //        val tagNameET
         val tasksRecyclerView: RecyclerView = findViewById(R.id.tasksRecyclerView)
 
@@ -38,6 +41,10 @@ class HomeScreen : AppCompatActivity() {
             when (it.itemId) {
                 R.id.page_1 -> {
                     println(1)
+                    if(homeScreenflag==false){
+                        startActivity(Intent(this, HomeScreen::class.java))
+                    }
+
 
                     true
                 }
@@ -45,8 +52,7 @@ class HomeScreen : AppCompatActivity() {
                 R.id.page_2 -> {
                     println(2)
 
-
-                    val dialog = BottomSheetDialog(this)
+                     val dialog = BottomSheetDialog(this)
 
 
                     val view = layoutInflater.inflate(R.layout.create_task, null)
@@ -81,6 +87,7 @@ class HomeScreen : AppCompatActivity() {
                 }
 
                 R.id.page_3 -> {
+                    homeScreenflag=false
                     println(3)
                     true
                 }

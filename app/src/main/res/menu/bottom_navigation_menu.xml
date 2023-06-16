@@ -6,18 +6,17 @@
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
 
-        android:title="home"/>
+        android:title="home" />
     <item
         android:id="@+id/page_2"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Add"
-         />
+        android:title="Add" />
 
 
     <item
         android:id="@+id/page_3"
         android:enabled="true"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="All"/>
+        android:title="All" />
 </menu>
