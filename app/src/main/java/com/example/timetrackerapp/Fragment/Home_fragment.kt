@@ -1,11 +1,12 @@
-package com.example.timetrackerapp.homeScreen
+package com.example.timetrackerapp.Fragment
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,6 @@ import com.example.timetrackerapp.R
 import com.example.timetrackerapp.adapter.TaskList
 import com.example.timetrackerapp.database.Database
 import com.example.timetrackerapp.database.entities.TaskEntity
-import com.example.timetrackerapp.task_execute
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
@@ -22,28 +22,38 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Time
 
-class HomeScreen : AppCompatActivity() {
-    lateinit var taskDB: Database
+lateinit var taskDB: Database
+class Home_fragment : Fragment() {
+    // TODO: Rename and change types of parameters
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
-        setContentView(R.layout.activity_main)
+        arguments?.let {
+
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        val view = inflater.inflate(R.layout.fragment_home_fragment, container, false)
         var homeScreenflag:Boolean=true
-//        val tagNameET
-        val tasksRecyclerView: RecyclerView = findViewById(R.id.tasksRecyclerView)
+        val tasksRecyclerView: RecyclerView = view.findViewById(R.id.tasksRecyclerView)
 
-        taskDB = Room.databaseBuilder(this, Database::class.java, "Tempdb").build()
+        taskDB = Room.databaseBuilder(view.context, Database::class.java, "Tempdb").build()
 
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.page_1 -> {
                     println(1)
-                    if(homeScreenflag==false){
-                        startActivity(Intent(this, HomeScreen::class.java))
-                    }
+//                    if(homeScreenflag==false){
+//                        startActivity(Intent(this, HomeScreen::class.java))
+//                    }
 
 
                     true
@@ -52,7 +62,7 @@ class HomeScreen : AppCompatActivity() {
                 R.id.page_2 -> {
                     println(2)
 
-                     val dialog = BottomSheetDialog(this)
+                    val dialog = BottomSheetDialog(view.context)
 
 
                     val view = layoutInflater.inflate(R.layout.create_task, null)
@@ -100,30 +110,24 @@ class HomeScreen : AppCompatActivity() {
         }
 
 
-
-
-
-
-
         taskDB.TaskDao().getTaskDetails()
-            .observe(this, Observer { Log.d("Datashit", it.toString()) })
+            .observe(viewLifecycleOwner, Observer { Log.d("Datashit", it.toString()) })
         // Live data alreadfy works on background thread so no need to add inside global scope
 
 
-        val a = taskDB.TaskDao().getTaskDetails().observe(this, Observer { it ->
-            tasksRecyclerView.adapter = TaskList(it,supportFragmentManager)
+        val a = taskDB.TaskDao().getTaskDetails().observe(viewLifecycleOwner, Observer { it ->
+            tasksRecyclerView.adapter = TaskList(it,childFragmentManager)
 
         })
 
-        tasksRecyclerView.layoutManager = LinearLayoutManager(this)
+        tasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
+
+
+
+
+        // Inflate the layout for this fragment
+        return view
     }
 
 
 }
-
-
-
-
-
-
-

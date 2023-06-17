@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav"
+    app:startDestination="@id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.example.timetrackerapp.Fragment.Home_fragment"
+        android:label="fragment_home_fragment"
+        tools:layout="@layout/fragment_home_fragment" >
+        <action
+            android:id="@+id/action_home_fragment_to_task_execute2"
+            app:destination="@id/task_execute2" />
+    </fragment>
+    <fragment
+        android:id="@+id/bottom_nav"
+        android:name="com.example.timetrackerapp.Fragment.Bottom_nav"
+        android:label="fragment_bottom_nav"
+        tools:layout="@layout/fragment_bottom_nav" />
+    <fragment
+        android:id="@+id/task_execute2"
+        android:name="com.example.timetrackerapp.Fragment.task_execute"
+        android:label="task_execute" />
+</navigation>

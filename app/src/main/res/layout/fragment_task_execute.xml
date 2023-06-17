@@ -1,14 +1,19 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:id="@+id/framelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:layout_gravity="center"
-    android:background="@color/white"
 
-    android:foregroundGravity="fill"><!--foreground color for a FrameLayout-->
+    android:background="@color/white"
+    android:foregroundGravity="fill"
+
+    android:orientation="vertical"><!--foreground color for a FrameLayout-->
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/contextual_action_bar" />
 
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -24,5 +29,30 @@
         app:trackColor="@color/black"
         app:trackThickness="8dp" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:indeterminate="true"
+        app:indicatorColor="@color/white"
+        app:indicatorSize="200dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/black"
+        app:trackThickness="8dp" />
 
-</FrameLayout>
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:indeterminate="true"
+        app:indicatorColor="@color/white"
+        app:indicatorSize="200dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/black"
+        app:trackThickness="8dp" />
+
+</LinearLayout>

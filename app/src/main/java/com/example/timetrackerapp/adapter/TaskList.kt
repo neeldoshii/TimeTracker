@@ -1,23 +1,18 @@
 package com.example.timetrackerapp.adapter
 
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.timetrackerapp.R
 import com.example.timetrackerapp.database.entities.TaskEntity
-import com.example.timetrackerapp.task_execute
+import com.example.timetrackerapp.Fragment.task_execute
 
 class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: FragmentManager) : RecyclerView.Adapter<TaskList.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -46,7 +41,7 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
             val taskExecuteFragment = task_execute()
             taskExecuteFragment.arguments = bundle
 
-            fragmentTransaction.add(R.id.space, taskExecuteFragment)
+            fragmentTransaction.replace(R.id.fragmentContainerView, taskExecuteFragment)
             fragmentTransaction.commit()
 
 
