@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import com.example.timetrackerapp.R
+import com.google.android.material.textfield.TextInputEditText
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,28 +39,37 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
+        val view =  inflater.inflate(R.layout.fragment_task_execute, container, false)
+        val taskNameText: TextView = view.findViewById(R.id.taskNameText)
+        val taskTagText: TextView = view.findViewById(R.id.taskTagText)
+        val counterTextView: TextView = view.findViewById(R.id.counterTextView)
+        val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
+        val quitBtn: Button = view.findViewById(R.id.quitBtn)
 
 
 
 
-        val positionkey = arguments?.getInt("positionkey", -1) ?: -1
-        if (positionkey != -1) {
-            // Use the position ID as needed
-            Log.d("TaskExecuteFragment", "Position: $positionkey")
 
 
-        }
         val TaskName = arguments?.getString("TaskName", null) ?: -1
         if (TaskName != -1) {
+            taskNameText.setText(TaskName.toString())
             // Use the position ID as needed
             Log.d("TaskExecuteFragment", "TaskName: $TaskName")
 
+        }
+        val TaskTag = arguments?.getString("TaskTag", null) ?: -1
+        if (TaskTag != -1) {
+            taskTagText.setText(TaskTag.toString())
+            // Use the position ID as needed
+            Log.d("TaskExecuteFragment", "Position: $TaskTag")
 
         }
 
 
 
-        return inflater.inflate(R.layout.fragment_task_execute, container, false)
+        return view
+
     }
 
     companion object {

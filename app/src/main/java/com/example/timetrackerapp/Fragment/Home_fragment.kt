@@ -45,11 +45,7 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
         val view = inflater.inflate(R.layout.fragment_home_fragment, container, false)
         var homeScreenflag:Boolean=true
         val tasksRecyclerView: RecyclerView = view.findViewById(R.id.tasksRecyclerView)
-//val text : TextView = view.findViewById(R.id.textView2)
-//        text.setOnClickListener(){
-//            println("Worked")
-//            findNavController().navigate(R.id.action_home_fragment_to_task_execute)//
-//        }
+
 
         taskDB = Room.databaseBuilder(view.context, Database::class.java, "Tempdb").build()
 
@@ -69,6 +65,8 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
 
                 R.id.page_2 -> {
                     println(2)
+                    var time1: Time? = null
+                    time1 = Time.valueOf("00:00:00")
 
                     val dialog = BottomSheetDialog(view.context)
 
@@ -89,7 +87,7 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
                                         0,
                                         taskNameET.text.toString(),
                                         tagNameET.text.toString(),
-                                        Time(System.currentTimeMillis())
+                                        time1
                                     )
                                 )
                         }

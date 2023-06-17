@@ -33,21 +33,12 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
         holder.taskTime.text = taskNamelist[position].taskTime.toString()
         holder.playBtn.setOnClickListener(){
             val bundle = Bundle()
-            bundle.putInt("positionkey", position)
+            bundle.putString("TaskTag", taskNamelist[position].taskTags)
             bundle.putString("TaskName", taskNamelist[position].taskName)
+            bundle.putString("TaskTime", taskNamelist[position].taskTime.toString())
+
             it.findNavController().navigate(R.id.action_home_fragment_to_task_execute,bundle)//
 
-//            println("CLick ******" + position)
-
-//
-//            // creating the instance of the bundle
-//
-//
-//            val taskExecuteFragment = task_execute()
-//            taskExecuteFragment.arguments = bundle
-//            val fragmentTransaction = fragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.framelayout, task_execute())
-//            fragmentTransaction.commit()
 
 
         }
