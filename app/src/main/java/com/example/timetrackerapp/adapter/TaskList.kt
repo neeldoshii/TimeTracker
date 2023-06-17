@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.timetrackerapp.R
@@ -30,19 +32,22 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
         holder.taskTag.text = taskNamelist[position].taskTags
         holder.taskTime.text = taskNamelist[position].taskTime.toString()
         holder.playBtn.setOnClickListener(){
-            println("CLick ******" + position)
-            val fragmentTransaction = fragmentManager.beginTransaction()
-
-            // creating the instance of the bundle
             val bundle = Bundle()
             bundle.putInt("positionkey", position)
             bundle.putString("TaskName", taskNamelist[position].taskName)
+            it.findNavController().navigate(R.id.action_home_fragment_to_task_execute,bundle)//
 
-            val taskExecuteFragment = task_execute()
-            taskExecuteFragment.arguments = bundle
+//            println("CLick ******" + position)
 
-            fragmentTransaction.replace(R.id.fragmentContainerView, taskExecuteFragment)
-            fragmentTransaction.commit()
+//
+//            // creating the instance of the bundle
+//
+//
+//            val taskExecuteFragment = task_execute()
+//            taskExecuteFragment.arguments = bundle
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id.framelayout, task_execute())
+//            fragmentTransaction.commit()
 
 
         }

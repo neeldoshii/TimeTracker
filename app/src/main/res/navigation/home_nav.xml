@@ -11,16 +11,39 @@
         android:label="fragment_home_fragment"
         tools:layout="@layout/fragment_home_fragment" >
         <action
-            android:id="@+id/action_home_fragment_to_task_execute2"
-            app:destination="@id/task_execute2" />
+            android:id="@+id/action_home_fragment_to_task_execute"
+            app:destination="@id/task_execute"
+            >
+            <argument
+                android:name="positionkey"
+                app:argType="integer" />
+            <argument
+                android:name="TaskName"
+                app:argType="string" />
+
+        </action>
     </fragment>
+    <fragment
+        android:id="@+id/task_execute"
+        android:name="com.example.timetrackerapp.Fragment.task_execute"
+        android:label="task_execute" />
     <fragment
         android:id="@+id/bottom_nav"
         android:name="com.example.timetrackerapp.Fragment.Bottom_nav"
         android:label="fragment_bottom_nav"
         tools:layout="@layout/fragment_bottom_nav" />
     <fragment
-        android:id="@+id/task_execute2"
-        android:name="com.example.timetrackerapp.Fragment.task_execute"
-        android:label="task_execute" />
+        android:id="@+id/tempHome2"
+        android:name="com.example.timetrackerapp.TempHome"
+        android:label="fragment_temp_home"
+        tools:layout="@layout/fragment_temp_home" >
+        <action
+            android:id="@+id/action_tempHome2_to_tempExe"
+            app:destination="@id/tempExe" />
+    </fragment>
+    <fragment
+        android:id="@+id/tempExe"
+        android:name="com.example.timetrackerapp.TempExe"
+        android:label="fragment_temp_exe"
+        tools:layout="@layout/fragment_temp_exe" />
 </navigation>

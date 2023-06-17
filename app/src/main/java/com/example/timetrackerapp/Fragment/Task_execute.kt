@@ -21,7 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [task_execute.newInstance] factory method to
  * create an instance of this fragment.
  */
-class task_execute() : Fragment() {
+class task_execute() : Fragment(R.layout.fragment_task_execute) {
     // TODO: Rename and change types of parameters
 
 

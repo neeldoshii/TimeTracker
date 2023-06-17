@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -23,7 +26,7 @@ import kotlinx.coroutines.launch
 import java.sql.Time
 
 lateinit var taskDB: Database
-class Home_fragment : Fragment() {
+class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
     // TODO: Rename and change types of parameters
 
 
@@ -42,6 +45,11 @@ class Home_fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home_fragment, container, false)
         var homeScreenflag:Boolean=true
         val tasksRecyclerView: RecyclerView = view.findViewById(R.id.tasksRecyclerView)
+//val text : TextView = view.findViewById(R.id.textView2)
+//        text.setOnClickListener(){
+//            println("Worked")
+//            findNavController().navigate(R.id.action_home_fragment_to_task_execute)//
+//        }
 
         taskDB = Room.databaseBuilder(view.context, Database::class.java, "Tempdb").build()
 
@@ -99,6 +107,7 @@ class Home_fragment : Fragment() {
                 R.id.page_3 -> {
                     homeScreenflag=false
                     println(3)
+//                    view.findNavController().navigate(R.id.action_home_fragment_to_task_execute2)
                     true
                 }
 
@@ -116,7 +125,7 @@ class Home_fragment : Fragment() {
 
 
         val a = taskDB.TaskDao().getTaskDetails().observe(viewLifecycleOwner, Observer { it ->
-            tasksRecyclerView.adapter = TaskList(it,childFragmentManager)
+            tasksRecyclerView.adapter = TaskList(it, childFragmentManager)
 
         })
 
