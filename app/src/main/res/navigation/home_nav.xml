@@ -26,24 +26,14 @@
     <fragment
         android:id="@+id/task_execute"
         android:name="com.example.timetrackerapp.Fragment.task_execute"
-        android:label="task_execute" />
+        android:label="task_execute" >
+        <action
+            android:id="@+id/action_task_execute_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
     <fragment
         android:id="@+id/bottom_nav"
         android:name="com.example.timetrackerapp.Fragment.Bottom_nav"
         android:label="fragment_bottom_nav"
         tools:layout="@layout/fragment_bottom_nav" />
-    <fragment
-        android:id="@+id/tempHome2"
-        android:name="com.example.timetrackerapp.TempHome"
-        android:label="fragment_temp_home"
-        tools:layout="@layout/fragment_temp_home" >
-        <action
-            android:id="@+id/action_tempHome2_to_tempExe"
-            app:destination="@id/tempExe" />
-    </fragment>
-    <fragment
-        android:id="@+id/tempExe"
-        android:name="com.example.timetrackerapp.TempExe"
-        android:label="fragment_temp_exe"
-        tools:layout="@layout/fragment_temp_exe" />
 </navigation>

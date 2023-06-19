@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.timetrackerapp.database.entities.TaskEntity
@@ -11,7 +12,7 @@ import com.example.timetrackerapp.database.entities.TaskEntity
 @Dao
 interface TaskDao {
 
-    @Insert
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(xyz:TaskEntity) // xyz is a object and Employee is data class
 
     @Delete

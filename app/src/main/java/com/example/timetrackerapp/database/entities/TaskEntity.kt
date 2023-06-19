@@ -12,5 +12,5 @@ data class TaskEntity(
     val id: Int,
     val taskName: String,
     val taskTags: String,
-    val taskTime : Time
+    val taskTime: Time
 )

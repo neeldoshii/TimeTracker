@@ -8,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.room.Room
 import com.example.timetrackerapp.R
 import com.example.timetrackerapp.database.Database
+import com.example.timetrackerapp.database.entities.TaskEntity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.sql.Time
+import java.time.LocalTime
 import java.util.Calendar
 import java.util.Date
 import java.util.Timer
@@ -60,11 +66,32 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 
             Log.d("TaskExecuteFragment", "TaskName: $id")
             val currentTime: Date = Calendar.getInstance().getTime()
-            Log.d("isthis0",currentTime.toString())
+            Log.d("isthis0", currentTime.toString())
         }
 
+        pauseBtn.setOnClickListener() {
+            pauseBtn.setText("Resume")
+            pauseTimer()
+        }
 
+        quitBtn.setOnClickListener(){
 
+            GlobalScope.launch {
+                taskDB.TaskDao()
+                    .insertTask(
+                        TaskEntity(
+                            id,
+                            taskNameText.text.toString(),
+                            taskNameText.text.toString(),
+                            Time.valueOf(counterTextView.text.toString())
+                        )
+                    )
+
+            }
+            Toast.makeText(view.context, "Updated", Toast.LENGTH_SHORT).show()
+            it.findNavController().navigate(R.id.action_task_execute_to_home_fragment)
+            
+        }
 
 
 
@@ -72,33 +99,22 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         taskDB = Room.databaseBuilder(view.context, Database::class.java, "Tempdb").build()
 
 
-
 //        long to time convertors
 
 
-
-        fun longToTime(longTime : Long) : Time{
-            return  Time(longTime)
+        fun longToTime(longTime: Long): Time {
+            return Time(longTime)
         }
-
-
-
 
 
 //        //Functions--------------
 //
 
-        fun updateTimer(time1:Time) {
+        fun updateTimer(time1: Time) {
 
 
             currentTime = System.currentTimeMillis() - initialTime + time1.time
-            Log.d("currentTime Tiem ",longToTime(currentTime).toString())
-
-//            val seconds = (currentTime / 1000) % 60
-//            val minutes = (currentTime / (1000 * 60)) % 60
-//            val hours = (currentTime / (1000 * 60 * 60)) % 24
-//            val timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-//            timerTextView.text = timeString
+            Log.d("currentTime Tiem ", longToTime(currentTime).toString())
 
             counterTextView.setText(longToTime(currentTime).toString())
         }
@@ -107,12 +123,12 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         fun startTimer(time: Time) {
             if (!isTimerRunning) {
 
-                val currentTime =System.currentTimeMillis()
+                val currentTime = System.currentTimeMillis()
                 val elapsedTime = currentTime - time.time
 //                val elapsedTime = currentTime + time.time
 
-                Log.d("Initial Tiem ",longToTime(time.time).toString())
-                Log.d("1st time system Time ",longToTime(System.currentTimeMillis()).toString())
+                Log.d("Initial Tiem ", longToTime(time.time).toString())
+                Log.d("1st time system Time ", longToTime(System.currentTimeMillis()).toString())
 
 
 
@@ -131,36 +147,8 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
             }
         }
 
-//
-////        fun startTimer(time: String) {
-////            if (!isTimerRunning) {
-////                val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-////                val currentDate = Date()
-////                val currentTime = dateFormat.format(currentDate)
-////                val initialDateTime = dateFormat.parse(currentTime.substring(0, 8))
-////                val storedTime = dateFormat.parse(time)
-////
-////                val elapsedTime = storedTime.time + initialDateTime.time
-////
-////                initialTime = elapsedTime
-////                timer = Timer()
-////                timerTask = object : TimerTask() {
-////                    override fun run() {
-////                        handler.post { updateTimer() }
-////                    }
-////                }
-////                timer.scheduleAtFixedRate(timerTask, 0, 1000)
-////                isTimerRunning = true
-////            }
-////        }
-//
-//
-        fun pauseTimer() {
-            if (isTimerRunning) {
-                timer.cancel()
-                isTimerRunning = false
-            }
-        }
+
+
 
         fun resetTimer() {
             timer.cancel()
@@ -197,16 +185,6 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 //                   println("specificData "+specificData.toString())
 
 
-//                    Log.d("id", idval.toString())
-//                    Log.d("taskName", taskName)
-//                    Log.d("taskTag", taskTag)
-//                    Log.d("taskTime", taskTime.toString())
-//
-//                    Log.d("shgdsdsdsd", taskName.toString())
-//                    println("Time to long hai"+longToTime(taskTime.time))
-//
-//                    Log.d("okie",Calendar.getInstance().timeInMillis.toString())
-//                    println("******************"+taskTime.time)
                     startTimer(taskTime)
                 }
 
@@ -219,6 +197,11 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 
     }
 
-
+    fun pauseTimer() {
+        if (isTimerRunning) {
+            timer.cancel()
+            isTimerRunning = false
+        }
+    }
 }
 
