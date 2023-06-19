@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
@@ -26,13 +25,6 @@ lateinit var taskDB: Database
 class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
     // TODO: Rename and change types of parameters
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,9 +54,6 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
 
                 R.id.page_2 -> {
                     println(2)
-                    var time1: Time? = null
-                    time1 = Time.valueOf("00:05:00")
-
                     val dialog = BottomSheetDialog(view.context)
 
 
@@ -84,7 +73,7 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
                                         0,
                                         taskNameET.text.toString(),
                                         tagNameET.text.toString(),
-                                        time1
+                                        Time.valueOf("00:00:00")
                                     )
                                 )
                         }

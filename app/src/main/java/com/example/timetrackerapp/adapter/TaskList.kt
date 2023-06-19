@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.timetrackerapp.R
 import com.example.timetrackerapp.database.entities.TaskEntity
-import com.example.timetrackerapp.Fragment.task_execute
 
 class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: FragmentManager) : RecyclerView.Adapter<TaskList.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

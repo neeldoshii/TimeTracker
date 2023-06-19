@@ -19,25 +19,21 @@ import com.example.timetrackerapp.database.entities.TaskEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Time
-import java.time.LocalTime
 import java.util.Calendar
 import java.util.Date
 import java.util.Timer
 import java.util.TimerTask
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.minutes
 
 
 class task_execute() : Fragment(R.layout.fragment_task_execute) {
-
+    lateinit var counterTextView: TextView
     private var initialTime: Long = 0
     private var currentTime: Long = 0
     private var isTimerRunning = false
     private lateinit var timer: Timer
     private lateinit var timerTask: TimerTask
     private val handler = Handler()
-    var a: Long = 0
+    var resumeFlag: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,7 +50,7 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         val view = inflater.inflate(R.layout.fragment_task_execute, container, false)
         val taskNameText: TextView = view.findViewById(R.id.taskNameText)
         val taskTagText: TextView = view.findViewById(R.id.taskTagText)
-        val counterTextView: TextView = view.findViewById(R.id.counterTextView)
+        counterTextView = view.findViewById(R.id.counterTextView)
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
         val quitBtn: Button = view.findViewById(R.id.quitBtn)
 
@@ -69,12 +65,8 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
             Log.d("isthis0", currentTime.toString())
         }
 
-        pauseBtn.setOnClickListener() {
-            pauseBtn.setText("Resume")
-            pauseTimer()
-        }
 
-        quitBtn.setOnClickListener(){
+        quitBtn.setOnClickListener() {
 
             GlobalScope.launch {
                 taskDB.TaskDao()
@@ -90,7 +82,7 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
             }
             Toast.makeText(view.context, "Updated", Toast.LENGTH_SHORT).show()
             it.findNavController().navigate(R.id.action_task_execute_to_home_fragment)
-            
+
         }
 
 
@@ -101,14 +93,13 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 
 //        long to time convertors
 
-
         fun longToTime(longTime: Long): Time {
             return Time(longTime)
         }
 
 
 //        //Functions--------------
-//
+
 
         fun updateTimer(time1: Time) {
 
@@ -121,24 +112,20 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 
 
         fun startTimer(time: Time) {
+            Log.d("Timer",time.toString())
             if (!isTimerRunning) {
 
                 val currentTime = System.currentTimeMillis()
-                val elapsedTime = currentTime - time.time
-//                val elapsedTime = currentTime + time.time
 
-                Log.d("Initial Tiem ", longToTime(time.time).toString())
-                Log.d("1st time system Time ", longToTime(System.currentTimeMillis()).toString())
-
-
+//                Log.d("Initial Tiem ", longToTime(time.time).toString())
+//                Log.d("1st time system Time ", longToTime(System.currentTimeMillis()).toString())
 
                 initialTime = currentTime
-//                println("time.toString().toLong()"+time.time)
+
                 timer = Timer()
                 timerTask = object : TimerTask() {
                     override fun run() {
 
-//                        Log.d("a",a.toString())
                         handler.post { updateTimer(time) }
                     }
                 }
@@ -148,8 +135,6 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         }
 
 
-
-
         fun resetTimer() {
             timer.cancel()
             isTimerRunning = false
@@ -157,6 +142,15 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 //            updateTimer()
         }
 
+
+        fun pauseTimer() {
+            if (isTimerRunning) {
+                timer.cancel()
+                isTimerRunning = false
+            }
+
+
+        }
 
 
 
@@ -191,17 +185,31 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
             })
 
 
+        pauseBtn.setOnClickListener() {
+            if (resumeFlag == false) {
+                pauseBtn.setText("Resume")
+                resumeFlag = true
+                pauseTimer()
+            } else {
+//                Toast.makeText(view.context, "Pause", Toast.LENGTH_SHORT).show()
+                pauseBtn.setText("Pause")
+                resumeFlag = false
+
+                startTimer(Time.valueOf(counterTextView.text as String?))
+
+
+
+            }
+
+        }
+
         //----------------------------------------
 
         return view
 
     }
 
-    fun pauseTimer() {
-        if (isTimerRunning) {
-            timer.cancel()
-            isTimerRunning = false
-        }
-    }
+
+
 }
 
