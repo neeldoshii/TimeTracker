@@ -33,9 +33,8 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
         holder.taskTime.text = taskNamelist[position].taskTime.toString()
         holder.playBtn.setOnClickListener(){
             val bundle = Bundle()
-            bundle.putString("TaskTag", taskNamelist[position].taskTags)
-            bundle.putString("TaskName", taskNamelist[position].taskName)
-            bundle.putString("TaskTime", taskNamelist[position].taskTime.toString())
+            bundle.putInt("Id", taskNamelist[position].id)
+
 
             it.findNavController().navigate(R.id.action_home_fragment_to_task_execute,bundle)//
 

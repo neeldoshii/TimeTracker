@@ -8,8 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.room.Room
 import com.example.timetrackerapp.R
+import com.example.timetrackerapp.database.Database
+import com.example.timetrackerapp.database.entities.TaskEntity
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,36 +41,86 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
 
-        val view =  inflater.inflate(R.layout.fragment_task_execute, container, false)
+        val view = inflater.inflate(R.layout.fragment_task_execute, container, false)
         val taskNameText: TextView = view.findViewById(R.id.taskNameText)
         val taskTagText: TextView = view.findViewById(R.id.taskTagText)
         val counterTextView: TextView = view.findViewById(R.id.counterTextView)
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
         val quitBtn: Button = view.findViewById(R.id.quitBtn)
 
+        var idValue : Int?=null
 
-
-
-
-
-        val TaskName = arguments?.getString("TaskName", null) ?: -1
-        if (TaskName != -1) {
-            taskNameText.setText(TaskName.toString())
+        val id = arguments?.getInt("Id", -1) ?: -1
+        if (id != -1) {
+            taskNameText.setText(id.toString())
             // Use the position ID as needed
-            Log.d("TaskExecuteFragment", "TaskName: $TaskName")
+
+            Log.d("TaskExecuteFragment", "TaskName: $id")
+            idValue = id
 
         }
-        val TaskTag = arguments?.getString("TaskTag", null) ?: -1
-        if (TaskTag != -1) {
-            taskTagText.setText(TaskTag.toString())
-            // Use the position ID as needed
-            Log.d("TaskExecuteFragment", "Position: $TaskTag")
 
-        }
+
+
+
+
+
+
+        taskDB = Room.databaseBuilder(view.context, Database::class.java, "Tempdb").build()
+
+
+        taskDB.TaskDao().getSpecificData(id)
+            .observe(viewLifecycleOwner, Observer {specificData ->
+                specificData.forEach { item ->
+                    val id = item.id
+                    val taskName = item.taskName
+                    val taskTag = item.taskTags
+                    val taskTime = item.taskTime
+//                   println("specificData "+specificData.toString())
+                    taskNameText.setText(taskName)
+                    taskTagText.setText(taskTag)
+                    counterTextView.setText(taskTime.toString())
+
+                    Log.d("id", id.toString())
+                    Log.d("taskName", taskName)
+                    Log.d("taskTag", taskTag)
+                    Log.d("taskTime", taskTime.toString())
+                }
+
+
+            })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -82,11 +138,12 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
          * @return A new instance of fragment task_execute.
          */
         // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance() =
-                task_execute().apply {
-                    arguments = Bundle().apply {
+        @JvmStatic
+        fun newInstance() =
+            task_execute().apply {
+                arguments = Bundle().apply {
 
-                    }
                 }
+            }
     }
 }

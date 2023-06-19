@@ -23,4 +23,14 @@ interface TaskDao {
     @Query("Select * from taskTable")
     fun getTaskDetails() : LiveData<List<TaskEntity>>
 
+//    @Query("SELECT * FROM taskTable WHERE id=:taskId")
+//    fun getSpecificData(taskId: Int): LiveData<List<TaskEntity>>
+
+    @Query("SELECT id,taskName, taskTags,taskTime FROM taskTable WHERE id=:taskId")
+    fun getSpecificData(taskId: Int): LiveData<List<TaskEntity>>
+
+
+
+
+
 }
