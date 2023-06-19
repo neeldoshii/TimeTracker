@@ -66,7 +66,7 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
                 R.id.page_2 -> {
                     println(2)
                     var time1: Time? = null
-                    time1 = Time.valueOf("00:00:00")
+                    time1 = Time.valueOf("00:05:00")
 
                     val dialog = BottomSheetDialog(view.context)
 
@@ -116,9 +116,11 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
             }
         }
 
+//
+//        taskDB.TaskDao().getTaskDetails()
+//            .observe(viewLifecycleOwner, Observer { Log.d("Datashit", it.toString()) })
 
-        taskDB.TaskDao().getTaskDetails()
-            .observe(viewLifecycleOwner, Observer { Log.d("Datashit", it.toString()) })
+
         // Live data alreadfy works on background thread so no need to add inside global scope
 
 
