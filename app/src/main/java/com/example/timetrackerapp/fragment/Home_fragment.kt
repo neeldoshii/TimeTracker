@@ -103,7 +103,7 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
         }
 
 
-        //Swipe Method
+        //Swipe Method 
 
             val a = taskDB.TaskDao().getTaskDetails().observe(viewLifecycleOwner, Observer { it ->
             tasksRecyclerView.adapter = TaskList(it, childFragmentManager)
@@ -114,9 +114,11 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
 
         val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//            taskList access the TaskList adpater class
                 val taskList = (tasksRecyclerView.adapter as TaskList)
 
                 val position = viewHolder.adapterPosition
+//                taskList.taskNamelist[position].id    here taskNameList access the list fields
                 val task_id_item=taskList.taskNamelist[position].id
 
                 GlobalScope.launch {
@@ -127,13 +129,8 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
             }
 
         }
-
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView)
-
-
-
         tasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
 
 
