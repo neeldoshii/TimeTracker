@@ -155,10 +155,10 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
                     .addBackgroundColor(
                         ContextCompat.getColor(
                             view.context,
-                            com.example.timetrackerapp.R.color.black
+                            com.example.timetrackerapp.R.color.white
                         )
                     )
-                    .addActionIcon(com.example.timetrackerapp.R.drawable.ic_launcher_background)
+                    .addActionIcon(R.drawable.baseline_delete_24)
                     .create()
                     .decorate()
                 super.onChildDraw(
