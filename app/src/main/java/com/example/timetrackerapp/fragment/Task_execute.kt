@@ -12,10 +12,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.example.timetrackerapp.R
 import com.example.timetrackerapp.database.Database
 import com.example.timetrackerapp.database.entities.TaskEntity
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Time
@@ -53,6 +56,7 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         counterTextView = view.findViewById(R.id.counterTextView)
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
         val quitBtn: Button = view.findViewById(R.id.quitBtn)
+
 
 
         val id = arguments?.getInt("Id", -1) ?: -1
@@ -202,6 +206,36 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
             }
 
         }
+
+
+
+//        Stop execute toolbar btn
+        val materialToolbar = view.findViewById<MaterialToolbar>(R.id.materialToolbar)
+        materialToolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.stopexecute -> {
+                    GlobalScope.launch {
+                        taskDB.TaskDao()
+                            .insertTask(
+                                TaskEntity(
+                                    id,
+                                    taskNameText.text.toString(),
+                                    taskNameText.text.toString(),
+                                    Time.valueOf(counterTextView.text.toString())
+                                )
+                            )
+
+                    }
+                    Toast.makeText(view.context, "Updated", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_task_execute_to_home_fragment)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+
 
         //----------------------------------------
 
