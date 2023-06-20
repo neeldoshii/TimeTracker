@@ -36,7 +36,10 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
 
             it.findNavController().navigate(R.id.action_home_fragment_to_task_execute,bundle)//
 
-
+//            GlobalScope.launch(){
+//
+//                taskDB.TaskDao().deleteSpecificData(taskNamelist[position].id)
+//            }
 
         }
 

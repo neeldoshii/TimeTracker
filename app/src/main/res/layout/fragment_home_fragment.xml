@@ -6,7 +6,7 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.Home_fragment">
+    tools:context=".fragment.Home_fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -121,7 +121,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

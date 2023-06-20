@@ -1,16 +1,19 @@
-package com.example.timetrackerapp.Fragment
+package com.example.timetrackerapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.timetrackerapp.R
+import com.example.timetrackerapp.adapter.SwipeToDeleteCallback
 import com.example.timetrackerapp.adapter.TaskList
 import com.example.timetrackerapp.database.Database
 import com.example.timetrackerapp.database.entities.TaskEntity
@@ -22,8 +25,8 @@ import kotlinx.coroutines.launch
 import java.sql.Time
 
 lateinit var taskDB: Database
+
 class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
-    // TODO: Rename and change types of parameters
 
 
     override fun onCreateView(
@@ -32,22 +35,21 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_home_fragment, container, false)
-        var homeScreenflag:Boolean=true
+        var homeScreenflag: Boolean = true
         val tasksRecyclerView: RecyclerView = view.findViewById(R.id.tasksRecyclerView)
+
 
 
         taskDB = Room.databaseBuilder(view.context, Database::class.java, "Tempdb").build()
 
+
+        //Switch case method for bottom navigation
 
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.page_1 -> {
                     println(1)
-//                    if(homeScreenflag==false){
-//                        startActivity(Intent(this, HomeScreen::class.java))
-//                    }
-
 
                     true
                 }
@@ -55,8 +57,6 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
                 R.id.page_2 -> {
                     println(2)
                     val dialog = BottomSheetDialog(view.context)
-
-
                     val view = layoutInflater.inflate(R.layout.create_task, null)
                     val taskNameET: TextInputEditText = view.findViewById(R.id.taskNameET)
                     val tagNameET: TextInputEditText = view.findViewById(R.id.tagNameET)
@@ -89,9 +89,9 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
                 }
 
                 R.id.page_3 -> {
-                    homeScreenflag=false
+                    homeScreenflag = false
                     println(3)
-//                    view.findNavController().navigate(R.id.action_home_fragment_to_task_execute2)
+
                     true
                 }
 
@@ -102,18 +102,37 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
             }
         }
 
-//
-//        taskDB.TaskDao().getTaskDetails()
-//            .observe(viewLifecycleOwner, Observer { Log.d("Datashit", it.toString()) })
 
+        //Swipe Method
 
-        // Live data alreadfy works on background thread so no need to add inside global scope
-
-
-        val a = taskDB.TaskDao().getTaskDetails().observe(viewLifecycleOwner, Observer { it ->
+            val a = taskDB.TaskDao().getTaskDetails().observe(viewLifecycleOwner, Observer { it ->
             tasksRecyclerView.adapter = TaskList(it, childFragmentManager)
 
         })
+
+        tasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
+
+        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val taskList = (tasksRecyclerView.adapter as TaskList)
+
+                val position = viewHolder.adapterPosition
+                val task_id_item=taskList.taskNamelist[position].id
+
+                GlobalScope.launch {
+                    taskDB.TaskDao().deleteSpecificData(task_id_item)
+
+                }
+                tasksRecyclerView.adapter?.notifyItemRemoved(position)
+            }
+
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+
+        itemTouchHelper.attachToRecyclerView(tasksRecyclerView)
+
+
 
         tasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
 

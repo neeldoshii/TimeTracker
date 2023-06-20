@@ -31,7 +31,8 @@ interface TaskDao {
     fun getSpecificData(taskId: Int): LiveData<List<TaskEntity>>
 
 
-
+    @Query("Delete FROM taskTable WHERE id=:id")
+    fun deleteSpecificData(id:Int): Int
 
 
 }

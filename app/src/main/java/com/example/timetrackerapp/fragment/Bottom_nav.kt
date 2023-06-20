@@ -1,4 +1,4 @@
-package com.example.timetrackerapp.Fragment
+package com.example.timetrackerapp.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

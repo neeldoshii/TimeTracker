@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.example.timetrackerapp.Fragment.Home_fragment"
+        android:name="com.example.timetrackerapp.fragment.Home_fragment"
         android:label="fragment_home_fragment"
         tools:layout="@layout/fragment_home_fragment" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/task_execute"
-        android:name="com.example.timetrackerapp.Fragment.task_execute"
+        android:name="com.example.timetrackerapp.fragment.task_execute"
         android:label="task_execute" >
         <action
             android:id="@+id/action_task_execute_to_home_fragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/bottom_nav"
-        android:name="com.example.timetrackerapp.Fragment.Bottom_nav"
+        android:name="com.example.timetrackerapp.fragment.Bottom_nav"
         android:label="fragment_bottom_nav"
         tools:layout="@layout/fragment_bottom_nav" />
 </navigation>
