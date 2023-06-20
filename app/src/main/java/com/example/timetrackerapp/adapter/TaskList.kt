@@ -36,14 +36,12 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
 
             it.findNavController().navigate(R.id.action_home_fragment_to_task_execute,bundle)//
 
-//            GlobalScope.launch(){
-//
-//                taskDB.TaskDao().deleteSpecificData(taskNamelist[position].id)
-//            }
 
         }
 
     }
+
+
     class MyViewHolder(itemView: View) : ViewHolder(itemView) {
         val taskName : TextView = itemView.findViewById(R.id.taskName)
         val taskTime : TextView = itemView.findViewById(R.id.taskTime)

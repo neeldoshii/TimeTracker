@@ -1,11 +1,15 @@
 package com.example.timetrackerapp.fragment
 
+
+
+
+import android.graphics.Canvas
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,9 +24,11 @@ import com.example.timetrackerapp.database.entities.TaskEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputEditText
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Time
+
 
 lateinit var taskDB: Database
 
@@ -125,6 +131,40 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
 
                 }
                 tasksRecyclerView.adapter?.notifyItemRemoved(position)
+            }
+
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                RecyclerViewSwipeDecorator.Builder(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                    .addBackgroundColor(
+                        ContextCompat.getColor(
+                            view.context,
+                            com.example.timetrackerapp.R.color.black
+                        )
+                    )
+                    .addActionIcon(com.example.timetrackerapp.R.drawable.ic_launcher_background)
+                    .create()
+                    .decorate()
+                super.onChildDraw(
+                    c!!, recyclerView!!,
+                    viewHolder!!, dX, dY, actionState, isCurrentlyActive
+                )
             }
 
         }
