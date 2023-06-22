@@ -1,7 +1,5 @@
 # TimeTracker
 
-# TimeTracker
-
 ## Features
 
 1. **Task Creation:** Users can easily create new tasks by providing a title, description, and duration.
