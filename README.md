@@ -1,2 +1,2 @@
-# TimeTracker
+# TimeTracker App
  
