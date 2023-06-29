@@ -60,5 +60,5 @@ Key Features:
 
 ## Demo
 
-![Demo](https://github.com/neeldoshii/TimeTracker/blob/main/demo1.gif)
+![Demo](https://github.com/neeldoshii/TimeTracker/blob/main/demo.gif)
 
