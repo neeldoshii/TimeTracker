@@ -26,11 +26,6 @@ Key Features:
 - [@Siddhesh Jondhale](https://github.com/Siddheshjondhale)
 
 
-## Demo
-
-Insert gif or link to demo
-
-` 
 # Time Tracking Application
 
 The Time Tracking application is a project aimed at helping individuals and teams manage their time effectively, increase productivity, and reduce procrastination. The application incorporates key features that allow users to create tasks, track their progress, and leverage the [concept of flow](https://en.wikipedia.org/wiki/Flow_(psychology)) to enhance their productivity.
