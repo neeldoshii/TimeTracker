@@ -210,30 +210,30 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
 
 
 //        Stop execute toolbar btn
-        val materialToolbar = view.findViewById<MaterialToolbar>(R.id.materialToolbar)
-        materialToolbar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.stopexecute -> {
-                    GlobalScope.launch {
-                        taskDB.TaskDao()
-                            .insertTask(
-                                TaskEntity(
-                                    id,
-                                    taskNameText.text.toString(),
-                                    taskNameText.text.toString(),
-                                    Time.valueOf(counterTextView.text.toString())
-                                )
-                            )
-
-                    }
-                    Toast.makeText(view.context, "Updated", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_task_execute_to_home_fragment)
-                    true
-                }
-
-                else -> false
-            }
-        }
+//        val materialToolbar = view.findViewById<MaterialToolbar>(R.id.materialToolbar)
+//        materialToolbar.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.stopexecute -> {
+//                    GlobalScope.launch {
+//                        taskDB.TaskDao()
+//                            .insertTask(
+//                                TaskEntity(
+//                                    id,
+//                                    taskNameText.text.toString(),
+//                                    taskNameText.text.toString(),
+//                                    Time.valueOf(counterTextView.text.toString())
+//                                )
+//                            )
+//
+//                    }
+//                    Toast.makeText(view.context, "Updated", Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(R.id.action_task_execute_to_home_fragment)
+//                    true
+//                }
+//
+//                else -> false
+//            }
+//        }
 
 
 
