@@ -27,5 +27,5 @@ Key Features:
 
 ## Demo
 
-![Demo](https://github.com/neeldoshii/TimeTracker/blob/main/demo.gif)
+![Demo](https://github.com/Siddheshjondhale/TimeTracker/blob/main/gifmaker_me.gif)
 
