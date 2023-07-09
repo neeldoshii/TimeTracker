@@ -179,18 +179,18 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView)
         tasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
 
-
+        val quotesText : TextView = view.findViewById(R.id.quotes)
 
         val quoteObj= quoteObject.news.getHeadlines()
   quoteObj.enqueue(object :retrofit2.Callback<QuotesData> {
       override fun onResponse(call: Call<QuotesData>, response: Response<QuotesData>) {
-          val quotesText : TextView = view.findViewById(R.id.quotes)
+
           quotesText.setText(response.body()?.content.toString() + "\n\n~"+response.body()?.author.toString())
           Log.d("quorte", response.body()?.content.toString())
       }
 
       override fun onFailure(call: Call<QuotesData>, t: Throwable) {
-
+          quotesText.setText("Never, never, never give up."  + "\n\n~" + "Issac Newton")
 
       }
 
