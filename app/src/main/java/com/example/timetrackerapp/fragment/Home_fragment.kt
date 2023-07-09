@@ -5,20 +5,25 @@ package com.example.timetrackerapp.fragment
 
 import android.graphics.Canvas
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.Callback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.timetrackerapp.R
 import com.example.timetrackerapp.adapter.SwipeToDeleteCallback
 import com.example.timetrackerapp.adapter.TaskList
+import com.example.timetrackerapp.api.QuotesData
+import com.example.timetrackerapp.api.quoteObject
 import com.example.timetrackerapp.database.Database
 import com.example.timetrackerapp.database.entities.TaskEntity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,6 +32,8 @@ import com.google.android.material.textfield.TextInputEditText
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
 import java.sql.Time
 
 
@@ -171,6 +178,23 @@ class Home_fragment : Fragment(R.layout.fragment_home_fragment) {
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView)
         tasksRecyclerView.layoutManager = LinearLayoutManager(view.context)
+
+
+
+        val quoteObj= quoteObject.news.getHeadlines()
+  quoteObj.enqueue(object :retrofit2.Callback<QuotesData> {
+      override fun onResponse(call: Call<QuotesData>, response: Response<QuotesData>) {
+          val quotesText : TextView = view.findViewById(R.id.quotes)
+          quotesText.setText(response.body()?.content.toString() + "\n\n~"+response.body()?.author.toString())
+          Log.d("quorte", response.body()?.content.toString())
+      }
+
+      override fun onFailure(call: Call<QuotesData>, t: Throwable) {
+
+
+      }
+
+  })
 
 
 
