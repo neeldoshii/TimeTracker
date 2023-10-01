@@ -25,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="center_vertical"
-
             app:menu="@menu/contextual_action_bar"
             app:navigationIcon="@drawable/baseline_arrow_back"
             app:title="title" />

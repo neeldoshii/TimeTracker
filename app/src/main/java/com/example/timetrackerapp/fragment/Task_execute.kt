@@ -57,7 +57,7 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
         val pauseBtn: Button = view.findViewById(R.id.pauseBtn)
         val quitBtn: Button = view.findViewById(R.id.quitBtn)
 
-
+        val backIcon: MaterialToolbar = view.findViewById(R.id.topAppBar)
 
         val id = arguments?.getInt("Id", -1) ?: -1
         if (id != -1) {
@@ -69,6 +69,9 @@ class task_execute() : Fragment(R.layout.fragment_task_execute) {
             Log.d("isthis0", currentTime.toString())
         }
 
+        backIcon.setOnClickListener {
+            it.findNavController().navigate(R.id.action_task_execute_to_home_fragment)
+        }
 
         quitBtn.setOnClickListener() {
 

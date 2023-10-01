@@ -97,7 +97,7 @@
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/play_icon">
+                    android:src="@drawable/baseline_play_arrow_24">
 
                 </ImageButton>
 
