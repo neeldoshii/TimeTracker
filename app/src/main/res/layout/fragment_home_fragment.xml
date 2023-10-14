@@ -21,10 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
-            android:text="Task"
-            android:textColor="@color/background_black"
             android:fontFamily="@font/rubik_medium"
+            android:text="Welcome 👋"
+            android:textColor="?android:textColorPrimary"
             android:textSize="24sp"
+            android:textFontWeight="800"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -46,8 +47,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:background="@color/background_black"
+                android:background="@color/green"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="TextView"
+            android:text="All Tasks"
+            android:textSize="16sp"
+            android:textColor="?android:textColorPrimary"
+            android:fontFamily="@font/rubik_medium"
+            android:textFontWeight="700"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
 

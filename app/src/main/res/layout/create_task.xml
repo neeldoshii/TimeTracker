@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     app:cardCornerRadius="16dp">
 
     <LinearLayout
@@ -13,17 +14,13 @@
         android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            />
         <TextView
             android:id="@+id/idTVCourseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Task Name:"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -46,9 +43,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="Task Tags"
-            android:textColor="@color/black"
+            android:textColor="?android:textColorPrimary"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -70,10 +67,14 @@
         <Button
             android:id="@+id/idBtnDismiss"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/green"
             android:text="Add Task"
-            android:textAllCaps="false" />
+            android:layout_marginBottom="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

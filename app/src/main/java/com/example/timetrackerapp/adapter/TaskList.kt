@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
@@ -46,7 +47,7 @@ class TaskList(val taskNamelist: List<TaskEntity>,  val fragmentManager: Fragmen
         val taskName : TextView = itemView.findViewById(R.id.taskName)
         val taskTime : TextView = itemView.findViewById(R.id.taskTime)
         val taskTag : TextView = itemView.findViewById(R.id.taskTag)
-        val playBtn : ImageButton = itemView.findViewById(R.id.playBtn)
+        val playBtn : ImageView = itemView.findViewById(R.id.playBtn)
 
 
     }

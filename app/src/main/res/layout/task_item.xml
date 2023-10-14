@@ -3,6 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical">
 
 
@@ -28,32 +29,18 @@
                 android:paddingTop="16dp"
                 android:paddingEnd="16dp">
 
-                <TextView
-                    android:id="@+id/placeholderTask"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="Task Name:"
-                    android:textSize="14sp"
-                    android:textStyle="bold">
-
-                </TextView>
 
                 <TextView
                     android:id="@+id/taskName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-
-                    android:layout_toRightOf="@+id/placeholderTask"
                     android:fontFamily="@font/rubik"
                     android:text="UI Design"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
+                    android:textColor="?android:textColorPrimary"
                     android:textStyle="bold">
 
                 </TextView>
-
 
 
                 <TextView
@@ -63,7 +50,7 @@
                     android:layout_alignParentRight="true"
                     android:fontFamily="@font/rubik"
                     android:text="00:33:33"
-                    android:textSize="12sp">
+                    android:textSize="14sp">
 
                 </TextView>
 
@@ -73,12 +60,10 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="horizontal"
                 android:paddingStart="16dp"
-                android:paddingTop="16dp"
+                android:paddingTop="12dp"
                 android:paddingEnd="16dp"
-
                 android:paddingBottom="16dp">
 
                 <TextView
@@ -86,20 +71,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="00:32:10"
-
+                    android:text="#Tag"
                     android:textSize="14sp">
-
                 </TextView>
 
-                <ImageButton
+                <ImageView
                     android:id="@+id/playBtn"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/baseline_play_arrow_24">
+                    android:src="@drawable/baseline_play_arrow_24"
+                    app:tint="?android:textColorPrimary">
 
-                </ImageButton>
+                </ImageView>
 
             </RelativeLayout>
 
